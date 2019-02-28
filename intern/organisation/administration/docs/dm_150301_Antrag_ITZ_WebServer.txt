@@ -1,0 +1,35 @@
+
+Benötigen Sie IT Unterstützung für einen Prozess oder eine neue Aufgabe? oder wünschen Sie eine Änderung oder Ergänzung einer bereits eingesetzten IT-Applikation? Dann möchten wir Sie um ein paar Angaben bitten. Füllen sie dazu bitte unser Formular aus. Das Planungsteam ITZ wird sich um Ihr Anliegen kümmern und mit Ihnen Kontakt aufnehmen. 
+   
+IT Projektideen
+Projekt Auftraggeber (auswählen drücken und Kontaktdaten suchen):
+
+
+Muzzulini, Daniel (189391)
+
+Wissenschaftlicher Mitarbeiter > Institute for Computer Music and Sound Technology > Institute > Departement Musik
+
+
+Projektinhalt / Bedürfnisse / Anforderung / Problem
+Anlässlich des bereits laufenden SNF-Projekts "Sound Colour Space - A Virtual Museum" am ICST, ith und MIZ benötigen wir einen Webserver mit ftp-Zugriff und Disk-Space, wo wir selbst Software installieren dürfen. 
+Beschreiben sie in 5-6 Sätzen den Inhalt des Vorhabens:
+
+Nutzen / Ziele / wer profitiert
+Da das Projekt u.a. auch eine Kollaboration mit dem Institut für Systematische Musikwissenschaft der Universität Wien beinhaltet, profitiert nicht nur die ZHdK, sondern die interdisziplinäre, wissenschaftliche Zusammenarbeit im In- und Ausland. 
+Beschreiben sie kurz und prägnant den Nutzen und die Ziele:
+
+möglicher Lösungsvorschlag
+Wir sind daran eine Applikation zu entwickeln, die auch Technologien verwendet, die mit einem Webserver kommunizieren und die an der ZHdK nicht standardmässig angeboten werden. Wir müssen also die Möglichkeit haben, selbst Software zu installieren. Das heisst wir brauchen Administratorrechte, die das zulassen.  
+Falls Sie einen möglichen Lösungsvorschlag haben, beschreiben sie diesen kurz:
+
+Konsequenzen bei Ablehnung
+Ausweichen auf Server-Ressourcen an der Uni Wien. 
+Beschreiben Sie kurz die Konsequenzen bei einer Ablehnung des Vorhabens:
+
+Wunschtermin
+ 
+Geben Sie einen realistischen Wunschtermin an:
+
+Autraggeber / Projektressourcen:
+Daniel Muzzulini, ICST / s.o. Webserver mit Admintratorrechten 
+Geben Sie Name und Abteilung des Auftraggebers an. Beschreiben Sie welche Personen an der Erarbeitung eines Projektantrags mitarbeiten werden:

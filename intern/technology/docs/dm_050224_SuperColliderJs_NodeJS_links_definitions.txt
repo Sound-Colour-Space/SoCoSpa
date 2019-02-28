@@ -1,0 +1,47 @@
+https://www.npmjs.com/package/supercolliderjs
+
+Tools for working with the SuperCollider music language environment
+
+Node JS and webrowser tools for working with SuperCollider.
+
+SuperCollider is an environment and programming language for real time audio synthesis and algorithmic composition. 
+It provides an interpreted object-oriented language which functions as a network client to a state of the art, realtime sound synthesis server.
+
+This library provides tools for working with:
+•scsynth (the synthesis server)
+•sclang (supercollider language interpreter)
+•sclang running in SuperCollider application (IDE + sclang).
+
+#Documentation
+
+http://supercolliderjs.readthedocs.org/en/latest/
+
+#Features
+•Spawn headless SuperCollider language interpreters (sclang)
+•Execute SuperCollider code from node js and get results or errors returned as JSON
+•Spawn SuperCollider synthesis servers (scsynth)
+•Send and receive OSC messages to scsynth
+•Call API endpoints in SuperCollider from a browser using JavaScript and a websocket/OSC bridge
+•Communicate with sclang running in SuperCollider.app (SC IDE) using OSC
+
+===
+
+http://de.wikipedia.org/wiki/Node.js
+
+Node.js
+
+Entwickler Joyent Inc. 
+Aktuelle Version 0.12.0[1]
+ (6. Februar 2015) 
+Betriebssystem Linux, Mac OS X, Windows, Solaris 
+Programmier­sprache C++, C, JavaScript 
+Kategorie Framework, Interpreter 
+Lizenz MIT-Lizenz[2] 
+nodejs.org 
+
+Node.js ist eine serverseitige Plattform zum Betrieb von Netzwerkanwendungen. 
+Insbesondere lassen sich Webserver damit realisieren. Node.js basiert auf der JavaScript-Laufzeitumgebung „V8“, die ursprünglich für Google Chrome entwickelt wurde, 
+und bietet daher eine ressourcensparende Architektur, die eine besonders große Anzahl gleichzeitig bestehender Netzwerkverbindungen ermöglicht.[3][4][5]
+
+==> vgl. Diskussion, wenig standardisiert?
+

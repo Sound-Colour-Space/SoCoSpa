@@ -1,0 +1,572 @@
+/* Stylesheet website sound-color-space.zhdk.ch */
+
+/* Farben
+
+	braun: #a78f75
+	gelb: #FFFABB
+	
+	Überschriften:
+	orange: #dd8840
+	
+	Hintergrund:
+	grau: #ddd
+	
+*/
+	
+/* Allgemeine Einstellungen */
+
+* {
+	/* Berechnet die Grössen der Boxen ohne padding und Border */
+    box-sizing: border-box; 
+} 
+
+body {
+	padding: 0;
+	margin: 0;
+	clear: both;
+	background-color: #ddd;
+	}
+	
+
+/* Allgemeine Schriften der Site */
+	
+h1, h2, h3, h4, h5 {
+	font-family: verdana, helvetica, arial, serif;
+	}
+	
+h1 {
+	font-size: 160%;
+	font-family: verdana, helvetica, arial, serif;
+	padding: 12px;
+	margin: 0;
+	}
+		
+p {
+	font-size: 100%;
+	color: light-grey;
+	font-family: times, serif;
+	}
+	
+.pfeil
+	{font-size: 50%}
+
+/* Layout-Elemente (html5) */
+
+
+main {
+	clear:both;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+	}
+	
+header {
+	/*background: #ffffff url("images/socospa3.jpg") no-repeat right top;*/
+	background-color: black;
+	background-image: url("images/socospa7.jpg");
+	background-repeat: no-repeat;
+	background-position: left top;
+	color: white;
+	text-align: center;
+	clear: both;
+	height: 90px;
+	min-width: 960px;
+	padding: 0;
+	margin: 0;
+	}
+	
+section {  
+	/* float: left;
+	padding: 2.5%;
+	text-align: left;*/
+	}
+
+aside {
+	background-color: #FFFABB;
+	float: right;
+	padding: 2.5%;
+	width: 35%;
+	max-width: 35%;
+	text-align: left;
+	}
+
+footer {
+	background-color: #ddd;
+	color: white;
+	clear: both;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding: 8px 0;
+	}
+	
+
+/* Weitere Layout-Elemente  */
+
+#wrapper {
+	clear:both;
+	width: 100%;
+	padding: 0px;
+	margin: 0px auto;
+	overflow: hidden;
+	}
+
+#fill {
+	background-color: #aaa;
+	clear: both;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	}
+	
+#container {
+	background-color: #fff;
+	margin: 0px auto;
+	padding: 0;
+	width: 95%;
+	max-width: 1400px;
+	min-width: 960px;
+	overflow: hidden;
+	}
+	
+#content {
+	float: left;
+	padding: 2.5%;
+	text-align: left;
+	}
+	
+#museum {
+	padding: 0;
+	text-align: left;
+	overflow: auto;
+	}
+	
+#editors {
+	width: 100%;
+	height: 900px;
+	border: 0;
+	}
+	
+/* image-Elemente allgemein */
+	
+#img_sience {
+	width: 100%;
+	text-align: left;
+	float: left;
+	display: inline-block;
+	}
+	
+#img_techno {
+	width: 60%;
+	text-align: center;
+	float: left;
+	display: inline-block;
+	}
+	
+figure {
+	padding: 0;
+	margin: 0;
+	}
+	
+figcaption {
+	margin: 5px 0 5px 0;
+	display: inline-block;
+	}
+	
+/* Klassen Layout und Grid */
+	
+.vimu_control {
+	text-align: left;
+	clear: both;
+	padding: 1% 0 2% 2.5%;
+	}
+	
+.textleft {
+	text-align: left;
+	}
+
+.sixcol {
+	width: 65%;
+	}
+	
+.threecol {
+	width: 35%;
+	}
+	
+.allcol {
+	width: 100%;
+	}
+	
+.halfcol {
+	width: 50%;
+	}
+
+.vimu_showroom {
+	padding: 2.5%;
+	float: left;
+	text-align: left;
+	overflow: auto;
+	}
+
+.vimu_collect {
+	float: right;
+	padding: 2.5%;
+	text-align: left;
+	background-color: #FFF;
+	}
+	
+.intern {
+	margin: 0px;
+	padding: 0px;
+	font-size: 80%;
+	font-family: verdana, helvetica, arial, serif;
+	position: absolute;
+	left: 90%;
+	top: 70px;
+	}
+	
+a.intern {
+
+	color: #aaa;
+	text-decoration: none;
+	text-align: center;
+	/*display: inline-block;
+	background-color: #eee;
+	width: 150px;*/
+	
+	}
+	
+	
+/* Listen Style = HAUPTNAVIGATION */
+
+nav {
+	font-family: verdana;
+	font-size: 100%;
+	width: 100%;
+	background-color: #ddd;
+	}
+
+#nav {
+	margin: 0px auto;
+	position: relative;
+	width: 1080px;
+	}
+	
+#nav:after {
+	content: "";
+	clear: both;
+	display: table;
+	}
+	
+ul#navigation {
+	margin: 0px auto;
+	position: relative;
+	float: left;
+	/* border-left: 1px solid #333;
+	border-right: 1px solid #333;*/
+	}
+	
+ul#navigation li {
+	margin: 0;
+	padding: 0;
+	display: inline;
+	float: left;
+	position: relative;
+	text-align: center;
+	/*
+	border-top:1px solid #c4dbe7;
+	 border-bottom:2px solid #c4dbe7;
+	*/
+	}
+	
+
+ul#navigation li a {
+
+	padding: 10px 0px;
+	color: #616161;
+	text-decoration: none;
+	display: inline-block;
+	background-color: #ddd;
+	width: 180px;
+	border-left:1px solid #fff;
+	/*
+	text-shadow:1px 1px 0px #fff;
+	width: 180px;
+	border-right:1px solid #fff;
+	border-left:1px solid #C2C2C2;
+	border-top:1px solid #fff;
+	*/
+	     
+	-webkit-transition:color 0.1s linear, background 0.1s linear;   
+	-moz-transition:color 0.1s linear, background 0.1s linear;  
+	-o-transition:color 0.1s linear, background 0.1s linear;    
+	transition:color 0.1s linear, background 0.1s linear;  
+	}
+	
+ul#navigation li a:hover {
+	background-color: #eee;
+	color:#282828;
+	}
+	
+ul#navigation li a.first {
+	border-left: 0 none;
+	}
+	
+ul#navigation li a.last {
+	border-right: 1px solid #fff;
+	}
+	
+ul#navigation li:hover > ul
+
+	{
+	/*these 2 styles are very important, 
+	being the ones which make the drop-down to appear on hover */
+	visibility:visible;
+	opacity:1;
+	}
+	
+ul#navigation ul, nul#navigation li ul {
+	
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	/*the next 2 styles are very important, 
+	being the ones which make the drop-down to stay hidden 
+	width: 180px;
+	background: #ccc;
+	box-shadow: 1px 1px 3px #eee;
+	display: none;
+	*/
+	visibility: hidden;
+	opacity: 0;
+	position: absolute;
+	z-index: 99999;
+	width: 180px;
+	background-color: #ddd;
+	
+	/* css3 transitions for smooth hover effect */
+	-webkit-transition:opacity 0.1s linear, visibility 0.1s linear; 
+	-moz-transition:opacity 0.1s linear, visibility 0.1s linear; 
+	-o-transition:opacity 0.1s linear, visibility 0.1s linear; 
+	transition:opacity 0.1s linear, visibility 0.1s linear; 
+	}
+	
+ul#navigation ul {
+	top: 42px;
+	left: 0px;
+	}
+	
+ul#navigation ul li ul {
+	top: 0;
+	left: 180px; /* strong related to width:180px; from above */
+}
+	
+ul#navigation ul li {
+
+	clear: both;
+	width: 100%;
+	border: 0 none;
+	text-align: center;
+	border-bottom: 1px solid #c9c9c9; 
+	}
+	
+ul#navigation ul li a {
+
+		background: none;
+		padding:7px 0px;
+		color: #616161;
+		text-decoration: none;
+		display: inline-block;
+		border: 0  none;
+		float: left;
+		clear: both;
+		width: 180px;
+}
+
+	
+/* Tabellen Umrandung */
+
+table.directory, table.directory th, table.directory td {
+    border: 1px solid black;
+    border-collapse: collapse; 
+}
+
+table.directory {
+	table-layout: fixed;
+	width: 100%;
+	overflow: hidden;
+	}
+
+th, td {
+    padding: 5px;
+    text-align: left;
+    overflow: hidden:
+}
+
+th {
+ 	color: #dd8840;
+ 	background-color:#eee;
+}
+
+td {
+ 	background-color:#fff;
+ }
+
+col.dateiname {
+    width: 65%;
+	white-space: pre-line;
+}
+
+col.typ {
+    width: 10%;
+}
+
+col.groesse {
+	width: 10%;
+}
+
+col.datum {
+    width: 15%;
+    min-width: 160px;
+}
+
+col.half {
+    width: 50%;
+}
+
+col.three {
+    width: 30%;
+}
+
+col.ten {
+	width: 10%;
+}
+
+col.fifteen {
+    width: 15%;
+}
+
+.hidden {
+ 	overflow: hidden;
+ }
+ 
+ /* Virtual Mueseum: Tables */
+
+table.vimu-table, table.vimu-table th,  table.vimu-table td {
+
+	border: 1px solid black;
+    border-collapse: collapse; 
+	width: 100%;
+	table-layout: fixed;
+	overflow: hidden;
+	}
+	
+table.vimu-show, table.vimu-show th,  table.vimu-show td {
+
+	border: 0;
+	border-collapse: collapse; 
+	width: 100%;
+	overflow: auto;
+
+	
+	}
+	
+ /* Virtual Mueseum: divs */
+ 
+ #left_nav {
+ 	margin: 0;
+ 	padding: 0;
+ 	width: 8%;
+ 	position: relative;
+ 	float: left;
+ 	}
+ 
+ #btn_ {
+
+ }
+ 
+#content_zone {
+	width: 92%;
+	float: left;
+	}
+	
+.vimu_form {
+	
+	background-color: #eee;
+	padding: 5px;
+	margin: 0 0 8px 0;
+	
+	}
+	
+#vila_edit {
+	
+	background-color: #eee;
+	padding: 5px;
+	margin: 0 0 8px 0;
+	
+	}
+
+.vimu_text {
+	font-size: 90%;
+	font-family: verdana, helvetica, arial, sans-serif;
+	}
+
+	
+	
+ 
+
+/* eingefärbte Tabelle */
+
+table#farbe, table#farbe th {  
+    background-color:black;
+}
+
+table#farbe tr:nth-child(even) {
+    background-color: #ddd;
+}
+table#farbe tr:nth-child(odd) {
+   background-color:#fff;
+ }  
+
+/* Farben und Eigenschaften der links definieren */
+	
+
+a, section a:link    {
+	color:#002299; 
+	background-color: transparent; 
+	text-decoration: none;
+	}
+	
+	
+a:visited {
+	color:#CC00CC; 
+	background-color: transparent; 
+	text-decoration: none;
+	}
+	
+a:hover   {
+	color:#ff0088; 
+	background-color: transparent; 
+	text-decoration: none;
+	}
+	
+a:active  {
+	color:#ff0000; 
+	background-color:transparent; 
+	text-decoration: none;
+	}
+	
+a.home, a.home:link, a.home:visited, a.home:hover, a.home:active {
+	color: white;
+	text-decoration: none;
+	}
+
+	
+/* header a, header a:link, header a:visited, header a:hover, header a:active {
+	color: white;
+	text-decoration: none;
+	}
+*/
+	
+	

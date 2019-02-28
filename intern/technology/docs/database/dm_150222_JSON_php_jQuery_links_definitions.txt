@@ -1,0 +1,81 @@
+JSON or JavaScript Object Notation 
+==================================
+
+http://www.tutorialspoint.com/json/json_quick_guide.htm
+
+JSON is a lightweight text-based open standard designed for human-readable data interchange. 
+Conventions used by JSON are known to programmers which include C, C++, Java, Python, Perl etc.
+This format was specified by Douglas Crockford.
+
+JSON is 
+- a lightweight human-readable text based interchange format
+- language independent
+- easy to read and write
+
+JSON has been extended from the JavaScript scripting language.
+JSON filename extension is .json
+JSON Internet Media type is application/json
+The Uniform Type Identifier is public.json
+
+Uses of JSON:
+- JSON is used when writing JavaScript based application which includes browser extension and websites.
+- JSON format is used for serializing & transmitting structured data over network connection.
+- JSON is primarily used to transmit data between server and web application.
+- Web Services and API.s use JSON format to provide public data.
+- JSON can be used with modern programming languages.
+
+---
+
+PHP
+===
+
+http://php.net/manual/en/intro-whatis.php
+
+PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used open source general-purpose scripting language that is especially suited for web development and can be embedded into HTML. 
+
+
+Example ("embedded php", i.e. embraced by special tags):
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <title>Example</title>
+    </head>
+    <body>
+
+        <?php
+            echo "Hi, I'm a PHP script!";
+        ?>
+
+    </body>
+</html> 
+
+What distinguishes PHP from something like client-side JavaScript is that the code is executed on the server, generating HTML which is then sent to the client. 
+The client would receive the results of running that script, but would not know what the underlying code was. 
+You can even configure your web server to process all your HTML files with PHP, and then there's really no way that users can tell what you have up your sleeve. 
+
+---
+
+jQuery
+======
+
+http://www.w3schools.com/jquery/default.asp
+
+jQuery is a JavaScript Library.
+jQuery greatly simplifies JavaScript programming.
+jQuery is easy to learn.
+
+ZUgriff aufs DOM und css, Animationen, zum Beispiel bewegte divs, event-Modell
+Tutorial mit leicht überprüf- und modifizerbaren Beispielen.
+
+
+
+
+
+
+
+
+
+
+

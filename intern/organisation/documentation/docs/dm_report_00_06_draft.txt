@@ -1,0 +1,186 @@
+DMu
+
+Kontakte/Zusammenarbeit
+=======================
+
+Sybille Krämer -> Diagrammatologie, Descartes 
+Benjamin Wardhaugh -> circular pitch diagrams, Descartes, history of mathematics
+Christoph Reuter -> Datenmodell, Vortrag timbre spaces
+Rainer Schmusch -> Klangfarbenmelodie, Herder
+Lesley Paganetti -> Lektorat gofml
+Dieter Binkert -> Graph DB
+Manuel Schürch -> Informatikstudent Absage
+Urs Müller -> Anfrage Progr. ?
+Marcel Bongni -> Bilder einer Ausstellung
+Stefan Graber -> Musik und Roboter, E.T.A Hoffmann
+
+Lucas Bennett -> Lektorat/Redaktion
+Jan Schacher -> Lektorat, immersive lab
+Stefano Papetti -> multimodal perception, haptic control (Descartes)
+Hanna Jarveläinen -> timbre
+
+Heiligensetzer BS UB -> Publikationsrechte / scans
+## -> Oculus Rift
+Federico Celestini -> Acta Musicologica
+Alberto Pinto -> Mathematik und Musik
+Eike -> Schönberg Centre
+Lukas Nef -> 
+Matthias -> tischmusi/Mayer: Atalanta fugiens
+Bojan -> immersive lab
+Max Haas -> Continuum
+Martin Kirnberger -> smg Basel, Musikinstrumentenmuseum
+Christoph Balmer -> Musikabteilung BS UB
+Ramona Ruckli -> Mareshal 
+
+Tagungen/Vorträge/Vernissagen
+=============================
+
+Stille in der MUsik 				13./14.12.05
+Buchvernissage Cab.Voltaire mit DMe		21.03.15
+Buchvernissage Fs. Lichtenhahn			30.03.15
+Vortrag: Alban Berg Kanon			28.04.15
+3d-Audio-Konferenz				09./10.05.15
+smg-100 Jahrfeier (MWI Uni Basel)		08.06.15
+	
+
+Datenbanken / Prototypen
+========================
+Ein erstes relationales Datenmodell wurde im Februar in Zusammenarbeit mit ChR erstellt und von DMu als leere Access-Datenbank eingegeben
+Das Modell wurde später leicht modifiziert als leere MySQl-Datenbank auf unserem Server mit phpMyadmin eingegeben.
+XAMPP wurde von DMu als lokaler Webserver mit php, mySql unter Windows 7 eingerichtet.
+Der Export der Datenbank in die lokale DB funktionierte nur unvollständig: nur ein Teil der Verknüfungen wurde kopiert. Die Tabellen und ihre Attribute hingegen wurden korrekt übertragen.
+
+Beispielanwendung: Diagrammausstellung
+--------------------------------------
+DMu programmiert zum Erproben der Kombination php, mySql, html, jQuery, ajax eine kleine Beispielanwendung (3.7-8.7.15).
+Dazu wurde eine Sammlung von etwa 150 Kreisdiagrammen (jpg-Dateien mit sprechenden Namen) unter 'museumsObjRessource' in der Datenbank erfasst.
+Die Datenbanktabelle 'museumsObjRessource' speichert die Dateinamen und nicht etwa die Dateien selbst. 
+Das Programm "Directory List" kann die Filenamen aus Windows-Verzeichnissen auslesen.
+Bei vorsichtiger Handhabung sind also keine Inkonsistenzen zwischen der Datenbank und den zugeordneten Dateien zu befürchten.
+Auf Basis der Liste aus "Directory List" können txt-Tabellen oder excel-Tabellen erstellt, deren Inhalte in die MySql Datenbanktabelle importiert werden. 
+Kommaseparierte Listen, deren Elemente mit Anführungszeichen (" ") geklammert sind, gewähren einen problemlosen Import aus einer txt-Datei (utf-8).
+Die zugehörigen Texte sollten keine Sonderzeichen enthalten (oder nur in Form von html escape-Sequenzen).
+Das Erfassen der Datenbankinhalte in separaten Tabellen ist effizienter als die direkte Eingabe der Informationen in die Datenbank.
+Da phpMyadmin Export und Import auf den Tabelleninhalten unproblematisch ist, kann gestaffelt gearbeitet werden.
+Die Beispielanwendung kann dabei zur Überprüfung der Inhalte beigezogen werden.
+
+Die php/html-Beispielanwendung besteht aus zwei Webseiten zur Visualisierung von Museumsobjektressourcen und Museumsobjekten.
+
+Zu einem Museumsobjekt ('museumsObj') gehören mehrere Diagramme ('museumsObjRessource'). Die Tabelle 'assemblage' erfasst die zu Grunde liegende n:n-Beziehung.
+Eines der zu einem Museumsobjekt gehörenden Diagramme dient als dessen Repräsentant. 
+Das betreffende flag (is_repraesentant) in 'assemblage' kann später dazu verwendet werden verschiedene Dateitypen und Funktionalitäten zu definieren.
+Die Elemente von 'museumsObjRessource' haben ein Attribut 'dateiKennung' (mime-type), sodass die betreffenden Dateien in nach Dateitypen getrennten Verzeichnissen abgelegt werden können.
+In Zukunkft wird ein Museumsobjekt nicht nur Bilder, sondern auch interaktive Animationen und andere Inhalte wie zugehörige Zeitschriftenartikel, Bibliograpien etc. aufnehmen.
+
+Die Page 'vimu_diagArchive.php' listet alle Diagramme mit Miniaturansicht in einer scrollbaren Tabelle (rechts) auf. 
+Mouseover vergrössert das Diagramm, Mouseclick überträgt es zusammen mit seinen Metadaten in die "Diagrammzone" (links). 
+Die Diagrammzone kann beliebig viele Diagramme aufnehmen und ist ebenfalls scrollbar.
+Klick auf das Diagramm in der Diagrammzone öffnet das Diagramm in einem separaten tab/window in Originalgrösse. Klick auf die ID der Liste öffnet ebenfalls das Diagramm in einem separaten tab/window.
+Die Diagrammzone kann als Ganzes gelöscht werden. [Später werden individuelles Löschen, Umordnen und Verlinkungen eingebaut.]
+Die Diagrammzone wird mit jQuery/ajax angesprochen und verwaltet, sodass nicht die ganze Seite neu geladen werden muss, wenn weitere Diagramme in die Diagrammzone übertragen werden.
+
+Die Page 'vimu_museums_obj.php' ist ähnlich aufgebaut wie 'vimu_diagArchive.php'
+Wenn der User in der Liste der Museumsobjekte auf das zugehörige repräsentative Diagramm klickt, wird ein request mit der 'id' des Museumsobjekts an 'vimu_assemble_museObj.php' geschickt.
+Die php-Datei 'vimu_assemble_museObj.php' holt die Information zum betreffenden Museumsobjekt und seinen Diagrammen aus den Tabellen 'museumsObj', 'museumsObjRessource', 'assemblage'.
+Aus dem Ergenis der Datenbankabfrage wird der html-Code für das betreffende Musuemsobjekt und seine Bestandteile erzeugt. 
+Dieser html-Code wird in der Diagrammzone ausgeführt. 
+In der Diagrammzone werden die Metadaten des ausgewählten Museumsobjekts über einer scrollbaren Liste mit den zugehörigen Diagrammen und ihren Metadaten dargestellt.
+Auch hier öffnet der Mausklick auf das Diagramm das zugehörige Bild in Originalgrösse in einem separaten Tab.
+Die Diagrammzone enthält die nach Jahreszahl geordneten Diagramme zu einem einzigen Museumsobjekt. Weitere Anordnungen sind geplant.
+In der Diagrammzone wird jeweils nur ein Museumsobjekt dargestellt.
+Bei Klick auf ein anderes Element der Museumsobjektliste wird der Inhalt der Diagrammzone ersetzt. 
+
+Fazit
+-----
+Die in relativ kurzer Zeit erstellte Beispielanwendung zeigt, dass die Kenntnisse zur Implementation des Museums im Team grundsätzlich vorhanden sind.
+Die verbleibenden Prozente aus Christine Kaufmanns Erbe könnten also auf musikwissenschaftliche, redaktionelle und gestalterische Arbeiten verteilt werden.
+
+
+Ausblick: Beschlagwortung, Themenhierarchien
+--------------------------------------------
+Alle Tabellen haben ein Attribut 'id', das als Primärschlüssel pro Tabelle eindeutig ist.
+Mehrere Tabellen verfügen auch über die Attribute 'Bezeichnung' und 'Beschreibung'.
+Es ist geplant, die Beschlagwortung über mehreren Tabellen 'museumsObj', 'museumsObjRessource', 'Ausstellung', 'Buchquellen', etc. zu implementieren
+Dazu wird in jeder der betroffenen Tabelle ein zusätliches Argument 'global_id' eingefügt. 
+Dieses wird aus einer eindeutigen Tabellennummer und der tabellenbezogenen 'id' errechnet: 
+Beispielsweise ist die global_id des Datensatzes mit id 135 in der Tabelle 7 als '7_135' definiert.
+Damit ist global_id ein über die Datenbank eindeutiger Schlüssel. 
+Die Beschlagwortung wird über diese globale Identifikation vorgenommen.
+Eine Tabelle mit Paaren von global_id regelt die Beschlagwortung über den zugehörigen heterogenen Objekten (Datensätze aus verschiedenen Tabellen).
+
+Typischerweise gibt dann eine Schlagwortabfrage, die von einem Museumsobjekt und seinen zugeordneten Schlagwörtern ausgeht, 
+Links auf andere Museumsobjekte, Museumsobjektressourcen, Ausstellungen, übergeordnete Themen, Laboranwendungen etc. zurück.
+Die Präsentation der gegliederten Suchergebnisse wird aus mehreren sql-Abfragen ermittelt.
+
+Das Vorgehen ist ein relationaler Ersatz für eine primitive Vererbung mit einem generischen Objekttyp (id, Bezeichnung, Beschreibung) von dem verschiedene Tabellen erben.
+[Vorsicht: Löschen von Datensätzen aus den Basistabellen, gelöschte id nie neu vergeben!; eventuell view mit Konsistenzprüfung]
+
+Die Implementierung der überlagerten Themenhierarchien wird vor allem bezüglich zugehörigen Navigationsgraphen und Navigationsexplorern anspruchsvoll.
+
+
+Ausblick: Graphdatenbank Neo4j
+------------------------------
+Eine zweite Beispielanwendung wird mit der Graphdatenbank Neo4j experimentieren. 
+Graphdatenbanken sind vor allem in Zusammenhang mit der Semantik (Beschlagwortung, Themenhierarchie, Ontologie) interessant.
+Neo4j arbeitet mit global identifizierbaren Entitäten (nodes = Knoten eines Graphen) variabler Struktur.
+Über der Knotenmenge werden entsprechend der grammatikalischen Struktur 'Subjekt-Prädikat-Objekt' einfacher Sätze gerichtete Verknüpfungen (Triplets) definiert.
+Subjekt und Prädikat entstammen der Knotenmenge, das Prädikat erlaubt eine Färbung des gerichteten Graphen. Die Verknüfungen werden als name/Value-Paare realisiert.
+In einer Graphdatenbank sind demnach die oben genannten überlagerten Hierarchien ohne Zusatzaufwand umsetzbar.
+'cypher' ist eine zu SQL analoge Abfrage- und Datenbankmanipulationssprache. 
+Die Einbettbarkeit, der graphischen Abfrageergebnisse in eine Webanwendung ist zu klären.
+
+Die Navigation in neo4j ist effizienter als in relationalen Datenbanken.
+Hingegen ist die heterogene und veränderbare Struktur der Knoten ein Vor- und Nachteil zugleich.
+Es existiert ein sql import.
+Allenfalls werden in der finalen Version des virtuellen Museums beide Datenbanktypen simultan eingesetzt. Der Austausch von Abfrageergebnissen via php müsste möglich sein.
+
+
+Ausblick: Sound-Color-Space Labor (RaV)
+=================================
+Im Rahmen der Evaluation der einzusetzenden Webtechnologien hat sich bei RaV die Idee eine Labors zu den Schlüsselbegriffen des Projekts Sound, Color, Space entwickelt.
+Auf der von RaV programmierten internen Website soll das Experimentieren mit den evaluierten Technolgien/Programmen via Web-Editor ermöglicht werden.
+In der endgŸltigen Fassung der Sound-Colour-Space Website soll das Labor registrierten Benützern zugänglich werden.
+Im Labor entwickelte interaktive Animationen könnten dem Museum in Form von MuseumsObjRessourcen zur Verfügung gestellt werden.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

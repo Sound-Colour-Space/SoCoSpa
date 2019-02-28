@@ -1,0 +1,309 @@
+DMu
+
+Kontakte/Zusammenarbeit
+=======================
+
+Sybille Krämer -> Diagrammatologie, Descartes 
+Benjamin Wardhaugh -> circular pitch diagrams, Descartes, history of mathematics
+Christoph Reuter -> Datenmodell, Vortrag timbre spaces
+Rainer Schmusch -> Klangfarbenmelodie, Herder
+Lesley Paganetti -> Lektorat gofml
+Dieter Binkert -> Graph DB
+Manuel Schürch -> Informatikstudent Absage
+Urs Müller -> Anfrage Progr. ?
+Marcel Bongni -> Bilder einer Ausstellung
+Stefan Graber -> Musik und Roboter, E.T.A Hoffmann
+
+Lucas Bennett -> Lektorat/Redaktion
+Jan Schacher -> Lektorat, immersive lab
+Stefano Papetti -> multimodal perception, haptic control (Descartes)
+Hanna Jarveläinen -> timbre
+
+Heiligensetzer BS UB -> Publikationsrechte / scans
+## -> Oculus Rift
+Federico Celestini -> Acta Musicologica
+Alberto Pinto -> Mathematik und Musik
+Eike -> Schönberg Centre
+Lukas Nef -> 
+Matthias -> tischmusi/Mayer: Atalanta fugiens
+Bojan -> immersive lab
+Max Haas -> Continuum
+Martin Kirnberger -> smg Basel, Musikinstrumentenmuseum
+Christoph Balmer -> Musikabteilung BS UB
+Ramona Ruckli -> Mareshal 
+
+Tagungen/Vorträge/Vernissagen
+=============================
+
+Stille in der MUsik 				13./14.12.05
+Buchvernissage Cab.Voltaire mit DMe		21.03.15
+Buchvernissage Fs. Lichtenhahn			30.03.15
+Vortrag: Alban Berg Kanon			28.04.15
+3d-Audio-Konferenz				09./10.05.15
+smg-100 Jahrfeier (MWI Uni Basel)		08.06.15
+	
+
+Datenbanken / Prototypen
+========================
+Ein erstes relationales Datenmodell wurde im Februar in Zusammenarbeit mit ChR erstellt und von DMu als leere Access-Datenbank eingegeben
+Das Modell wurde später leicht modifiziert als leere MySQl-Datenbank auf unserem Server mit phpMyadmin eingegeben.
+XAMPP wurde von DMu als lokaler Webserver mit php, mySql unter Windows 7 eingerichtet.
+Der Export der Datenbank in die lokale DB funktionierte nur unvollständig: nur ein Teil der Verknüfungen wurde kopiert. Die Tabellen und ihre Attribute hingegen wurden korrekt übertragen.
+
+Beispielanwendung: Diagrammausstellung
+--------------------------------------
+DMu programmiert zum Erproben der Kombination php, mySql, html, jQuery, ajax eine kleine Beispielanwendung (3.7-8.7.15).
+Dazu wurde eine Sammlung von etwa 150 Kreisdiagrammen (jpg-Dateien mit sprechenden Namen) unter 'museumsObjRessource' in der Datenbank erfasst.
+Die Datenbanktabelle 'museumsObjRessource' speichert die Dateinamen und nicht etwa die Dateien selbst. 
+Das Programm "Directory List" kann die Filenamen aus Windows-Verzeichnissen auslesen.
+Bei vorsichtiger Handhabung sind also keine Inkonsistenzen zwischen der Datenbank und den zugeordneten Dateien zu befürchten.
+Auf Basis der Liste aus "Directory List" können txt-Tabellen oder excel-Tabellen erstellt, deren Inhalte in die MySql Datenbanktabelle importiert werden. 
+Kommaseparierte Listen, deren Elemente mit Anführungszeichen (" ") geklammert sind, gewähren einen problemlosen Import aus einer txt-Datei (utf-8).
+Die zugehörigen Texte sollten keine Sonderzeichen enthalten (oder nur in Form von html escape-Sequenzen oder mit "\").
+Das Erfassen der Datenbankinhalte in separaten Tabellen ist effizienter als die direkte Eingabe der Informationen in die Datenbank.
+Da phpMyadmin Export und Import auf den Tabelleninhalten unproblematisch ist, kann gestaffelt gearbeitet werden.
+Die Beispielanwendung kann dabei zur Überprüfung der Inhalte beigezogen werden.
+
+Die php/html-Beispielanwendung besteht aus zwei Webseiten zur Visualisierung von Museumsobjektressourcen und Museumsobjekten.
+
+Zu einem Museumsobjekt ('museumsObj') gehören mehrere Diagramme ('museumsObjRessource'). Die Tabelle 'assemblage' erfasst die zu Grunde liegende n:n-Beziehung.
+Eines der zu einem Museumsobjekt gehörenden Diagramme dient als dessen Repräsentant. 
+Das betreffende flag (is_repraesentant) in 'assemblage' kann später dazu verwendet werden verschiedene Dateitypen und Funktionalitäten zu definieren.
+Die Elemente von 'museumsObjRessource' haben ein Attribut 'dateiKennung' (mime-type), sodass die betreffenden Dateien in nach Dateitypen getrennten Verzeichnissen abgelegt werden können.
+Ein Museumsobjekt beinhaltet nicht nur Bilder, sondern auch interaktive Animationen und andere Inhalte wie zugehörige Zeitschriftenartikel, Bibliograpien etc. aufnehmen.
+
+Die Page 'vimu_diagArchive.php' listet alle Diagramme mit Miniaturansicht in einer scrollbaren Tabelle (rechts) auf. 
+Mouseover vergrössert das Diagramm, Mouseclick überträgt es zusammen mit seinen Metadaten in die "Diagrammzone" (links). 
+Die Diagrammzone kann beliebig viele Diagramme aufnehmen und ist ebenfalls scrollbar.
+Klick auf das Diagramm in der Diagrammzone öffnet das Diagramm in einem separaten tab/window in Originalgrösse. Klick auf die ID der Liste öffnet ebenfalls das Diagramm in einem separaten tab/window.
+Die Diagrammzone kann als Ganzes geleert werden. [Später werden individuelles Löschen, Umordnen und Verlinkungen eingebaut.]
+Die Diagrammzone wird mit jQuery/ajax angesprochen und verwaltet, sodass nicht die ganze Seite neu geladen werden muss, wenn weitere Diagramme in die Diagrammzone übertragen werden.
+
+Die Page 'vimu_museums_obj.php' ist ähnlich aufgebaut wie 'vimu_diagArchive.php'
+Wenn der User in der Liste der Museumsobjekte auf das zugehörige repräsentative Diagramm klickt, wird ein request mit der 'id' des Museumsobjekts an 'vimu_assemble_museObj.php' geschickt.
+Die php-Datei 'vimu_assemble_museObj.php' holt die Information zum betreffenden Museumsobjekt und seinen Diagrammen aus den Tabellen 'museumsObj', 'museumsObjRessource', 'assemblage'.
+Aus dem Ergenis der Datenbankabfrage wird der html-Code für das betreffende Musuemsobjekt und seine Bestandteile erzeugt. 
+Dieser html-Code wird in der Diagrammzone ausgeführt. 
+In der Diagrammzone werden die Metadaten des ausgewählten Museumsobjekts über einer scrollbaren Liste mit den zugehörigen Diagrammen und ihren Metadaten dargestellt.
+Auch hier öffnet der Mausklick auf das Diagramm das zugehörige Bild in Originalgrösse in einem separaten Tab.
+Die Diagrammzone enthält die nach Jahreszahl geordneten Diagramme zu einem einzigen Museumsobjekt. Weitere Anordnungen sind geplant.
+In der Diagrammzone wird jeweils nur ein Museumsobjekt dargestellt.
+Bei Klick auf ein anderes Element der Museumsobjektliste wird der Inhalt der Diagrammzone ersetzt. 
+
+Fazit
+-----
+Die in relativ kurzer Zeit erstellte Beispielanwendung zeigt, dass die Kenntnisse zur Implementation des Museums im Team grundsätzlich vorhanden sind.
+Die verbleibenden Prozente aus Christine Kaufmanns Erbe könnten also auf musikwissenschaftliche, redaktionelle und gestalterische Arbeiten verteilt werden.
+
+
+Bericht: Lokale Testdatenbank, Beschlagwortung, Themenhierarchien
+=================================================================
+
+Alle Tabellen haben ein Attribut 'id', das als Primärschlüssel pro Tabelle eindeutig ist.
+Mehrere Tabellen verfügen auch über die Attribute 'Bezeichnung' und 'Beschreibung'. Zur Zeit 'museumsObj', 'museumsObjRessource', 'Ausstellung', 'Topic'.
+In objektorientierter Sprechweise bilden diese Tabellen die generischen museumsbezogene Klassen, deren Instanzen (Datensätze) die zentralen semantischen Entitäten des Museums aumachen. 
+Die Beschlagwortung und andere inhaltliche Verknüpfungen laufen über alle Tabellen mit diesen generischen Attributen.
+Das im Folgenden beschriebene Vorgehen ist ein relationaler Ersatz für eine einfache Vererbung von einem generischen Objekttyp (id, Bezeichnung, Beschreibung) 
+
+Globale ID 'gid'
+----------------
+Eine separate Tabelle listet die Datenbanktabellen mit ihrer 'id' auf: 1 Museumsobjektressource / 2 Museumsobjekt / 3 Topic / 4 Ausstellung, etc. (id, Tabellenname, Bezeichnung). 
+--> mySQL von Hand, Umbenennungen nachführen.
+
+Das Argument 'gid', ist eine globale Identifikation einer semantischen Einheit. Dieses wird aus einer eindeutigen Tabellennummer und der tabellenbezogenen 'id' zusammengesetzt.
+Beispielsweise ist die gid des Datensatzes mit id 135 in der Tabelle 2 als '2_135' definiert. Sie identifiziert das Museumsobjekts mit der lokalen id 135. 
+
+--> In mySql wird dies mit einem oninsert-Trigger verwirklicht. Jede betroffene Tabelle braucht einen solchen Trigger. Sie verwenden alle die Funktion #generateGID#, die die gid erzeugt.
+--> Vorsicht: Löschen von Datensätzen aus den Basistabellen, gelöschte id nie neu vergeben! --> Konsistenzprüfung 
+
+
+Beschlagwortung
+---------------
+Die Beschlagwortung läuft über alle Tabellen (Datentypen), deren Datensätze semantische Einheiten repräsentieren.
+Jede beschlagwortete Tabelle braucht eine separate Beziehungstabelle. --> Konsistente Namengebung mit Tabellen-ID im Namen der Beziehungstabelle 'beschlagwortung_2' für Beschlagwortung der Museumsobjekte.
+Eine SQL-View dient als Look-up-Tabelle, die alle Paare aus Schlagwort-ID und gid verzeichnet --> In mySQL als union realisiert (nach gid sortiert).
+Die View verzeichnet also die Beschlagwortung über den zugehörigen heterogenen Objekten (Datensätze aus verschiedenen Tabellen) und wird bei Schlagwortabfragen eingesetzt.
+
+Zur Zeit gibt es noch keine Ausstellungen. 
+Es ist zu überlegen, ob die Beschlagwortung und andere inhaltliche Verknüpfungen allenfalls ausstellungsspezifisch möglich sein soll. 
+--> zusätzliche Fremdschlüsselspalte in der Beschlagwortungstabelle.
+
+
+Schlagwortabfragen
+------------------
+Typischerweise gibt eine Schlagwortabfrage, die von einem Museumsobjekt und seinen zugeordneten Schlagwörtern ausgeht, Links auf andere Museumsobjekte, Museumsobjektressourcen, Ausstellungen, übergeordnete Themen, Laboranwendungen, etc. zurück.
+Zur Zeit (19.07.15) gibt es eine Page 'vimu_s_museobjres.php', die ein Diagramm (MuseumsobjRessource) mit seinen Metadaten visualisiert.
+Dazu gehört die Auflistung der dem Diagramm zugeordneten Schlagwörter und zu jedem dieser Schlagwörter eine Liste aller andern dem betreffenden Schlagwort zugeordneten Diagramme und Museumsobjekte. 
+Das heisst die Navigation via gemeinsamer Schlagwörter ist bereits möglich.
+
+Die Diagrammeinzelansicht 'vimu_s_museobjres.php'  wird aus der Listenansicht von 'vimu_diagArchive.php' aus über einen Link mit der gid des Diagramms (url get) aufgerufen.
+Dabei wird ein neues Tab/Fenster geöffnet. Das ist provisorisch. Das kann auch innerhalb der Diagrammzone stattfinden.
+
+Einfache und zsammenegesetzte Exponate
+--------------------------------------
+Es ist vorgesehen, die Museumsobjekteinzelansicht so zu gestalten, dass die Navigation gleich funktioniert.
+Damit werden Einzeldiagramme und zusammengesetzte Museumsobjekte gleich behandelt. 
+Insbesondere können Einzeldiagramme und zusammengesetzte Museumsobjekte gleichermassen als Exponate fungieren.
+Es ist also nicht nötig, zu einem eigenständigen Diagramm ohne Zusatzressourcen explizit ein Museumsobjekte zu erstellen, wenn dieses ausgestellt werden soll.
+
+
+Descartes' Kreisdiagramme, ein Beispiel zur Strukturierung
+==========================================================
+Descartes Compendium Musicae enthält vier Kreisdiagramme:
+	1 Konsonanzen, 
+	2 Diatonische Skala mit ambiger Tonstufe (synt. Komma), 
+	3 Diatonische Skala mit siebter Stufe b/h, 
+	4 Tonsystem aus drei kongruenten Hexachorden
+Die zweite und dritte Abbildung sind stehen jeweils direkt neben einander und gehören inhaltlich näher zusammen als die andern.
+Es gibt drei frühe handschriftliche Abschriften des Texts mit diesen Diagrammen, Descartes' Original ist verschollen
+Ferner wurde die Schrift (nach Descartes' Tod) noch im 17. Jahrhundert viermal gedruckt Lateinisch 1650, Englisch 1653, Lateinisch 1656, Französisch 1668
+ 
+Die insgesamt 4 x 7 = 28 Bilder können auf einer Ausstellungswand in Matrixform 7 Zeilen, 4 Spalten angeordnet werden. 
+Das heisst jedes Diagramm enthält dabei ein fixe Position auf der Wand.
+Anderseits ist es sinnvoll, die jeweils sieben gleichen Diagramme einer Spalte zu einem Museumsobjekt zusammenzufassen, ebenso die die vier Diagramme pro Zeile aus der gleichen Quelle.
+
+Neben der Wand mit den 28 Diagrammen werden also 11 Museumsobjekte erzeugt, die alle mit Zusatzinformation versehen werden können.
+Die 11 Museumsobjekte können  in einer 5 x 8 Matrix untergebracht werden, so dass die 28 Diagramme und 11 Museumsobjekte durch Navigation erreicht werden können.
+
+
+Die englische kommentierende Ausgabe des Compendium musicae enthält ein paar Diagramme mehrfach, da ihre "Korrektheit" in England hinterfragt wurde (gid 1_103 - 1_106).
+Diese zusätlichen Diagramme aus der englischen Ausgabe können mit den zugehörigen Diagrammen des gleichen Texts zu neuen Museumsobjekten zusammengefasst werden.
+Es gibt auch eine frühe handschriftliche Weiterentwicklung des Diagramms 4 durch Newton von 1664 (gid 1_107). Es enthält 5 statt drei konzentrische Kreise und vollständige Durskalen statt Hexachorde sowie Rechnungen.
+Eine anonyme Schrift von 1684  ersetzt im Diagramm 4 die konzentrischen Kreise durch eine Spirale (gid 1-115).
+Später, 1704, erweitert Newton das Diagramm 2 zu einer Farb/Tonordnung (gid 1_107).
+Taylor, 1749, ergänzt Newtons Farb/Tondiagramm mit einer Schwerpunktskonstruktion, die eigentlich eine Erweiterung in die dritte Dimension (gid 1_119).
+Robert Smith, 1749, verwendet mehrere Kreisdiagramme in unterschiedlichem Kontext.
+Damit können weitere Museumsobjekte gebildet werden.
+
+In allen diesen Diagrammen werden Töne/Tonigkeiten oder Farben in Polarkoordinaten dargestellt und die Winkel sind von entscheidender Rolle.
+
+Analysetools und zugeordnete Animationen
+----------------------------------------
+Zur logarithmischen Darstellung der Tonigkeiten und Intervalle auf Kreisen können je exakte Darstellungen als Vergleichsbilder oder transparente Schablonen hersgestellt werden.
+Die angezeigten Töne/Tonigkeiten Intervalle/Intervalklassen können in einer interaktiven Animation hörbar gemacht werden, gemäss Rechnung und gemäss Zeichnung.
+Analysetool: Ein interaktiver Transporteur zur Winkelmessung auf Gradgenauigkeit (1° = 10/3 cent = 3.33 cent), mit dem die Diagramme direkt am Bildschirm zentriert und vermessen werden können. --> jQuery
+Audiobeispiele können, pythagoreische, syntonische und 12-temperierte Stimmungen vergleichen (z.B durch Abspielen einschlägiger begleiteter und unbegleiteter Melodien) 
+Insbesondere die um ein syntonisches Komma mobile zweite Stufe der diatonischen Skala, könnte gemäss Descartes's Instruktionen hörbar gemacht werden.
+Diagramm 4 und Newtons Verallgemeinerung und mutierende Stimmungen -> Visualisierung im Eulergitter etc.
+Diese Tools und Hilfsmittel können den Museumsobjekten zur Verfügung gestellt werden, indem die betreffenden Dateien in die Ressourcen der betreffenden Museumsobjekte aufgenommen werden.
+
+Newtons Farb/Tonkreis (bzw. Castels System auf einem Zylinder oder einer Spirale) kann mit dem Spielen von Melodien auch farblich begleitet werden. (Oktavähnlichkeit = Helligkeit einer Farbe).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Themenhierarchien
+=================
+Die Implementierung der überlagerten Themenhierarchien wird vor allem bezüglich zugehörigen Navigationsgraphen und Navigationsexplorern anspruchsvoll --> rekursive Funktionen
+Vorgängig soll über dem in der DB vorhandenen Bildmaterial eine sinnvolle Gliederung vorgenommen werden, die die Idee der überlagerten gefärbten Bäume beispielshaft illustriert.
+
+
+Bildmotive, innere Strukturierung 
+=================================
+Das Eingangsbild zu Robert Fludds 'Templum musicae' ist eine Art Metadiagramm (Bilder im Bild), das heisst es enthält mehrere eigenständige Teilbereiche.
+Einige dieser Teilbereiche sind Diagramme, andere piktorialer Natur. 
+Die Teilbereiche werden im zugehörigen Traktat als Bestandteile des Tempels besprochen und in Detailansichten noch einmal wiedergegeben. Die Teilbereiche sind aber auch aufeinander bezogen. 
+Das Bild 'Templum musicae' weist also sowohl bildinterne als auch bildextrene Verknüfungen auf.
+Es eignet sich deshalb hervorragend als Einstieg in Ausstellungen mit Musiktheoretischen Fragestellungen. Es könnte aber auch als Repräsentant eines Museumsobekts dienen.
+Es scheint naheliegend derartige Bilder mit polygonalen Linkbereichen zu überdecken.
+
+Es stellt sich die Frage, ob derartige Bilder als museumsObjRessourcen oder als separater Datentyp behandelt werden sollen.
+Sollen generell Bildateien nicht nur als Ganze, sondern auch ihre Bildmotive beschlagwortbar und verlinkbar sein?
+Wenn das SoCoSpa-ViMu als Vorlage für andere virtuelle Ausstellungs-/Museumsprojekte (als vimu-Software) dienen soll, ist diese Frage zu bejahen, 
+denn bei der Interpretation von Bildern, Fotographien etc. wird in der Regel auf in ihnen lokalisierte Motive oder Teibereiche Bezug genommen.
+Die bestehende Diagrammsammlung scheint dies nicht zu erzwingen, da die Bildinhalte eher atomar und eindeutig pro Diagramm interpretierbar sind.
+
+Einstiegsseiten zu Ausstellungen
+--------------------------------
+Im Minimum wird einer Ausstellung eine standardisierte textbasierte Einstiegsseite zugewiesen, die durch ein verlinktes Einstiegsbild ersetzt werden kann.
+Die Einstiegsseite verzeichnet die Exponate, ist Start für geführte Touren etc. und erlaubt das freie Umherschweifen.
+Eine Erweiterung des Datenmodells ist nötig, wenn das Einstiegsbild und die Information, über die verlinkten Polygone in der Datenbank gehalten werden. --> andernfalls müssen Einstiegsseiten von Hand programmiert werden...
+Die minimale Information, die einer Linkzone zugewiesen wird ist die gid der betreffenden Exponate (Einzelbilder, Bildgruppen) oder Wände, Räume.
+  
+
+--> Zuordnung von Stichwörtern zu Bildmotiven : einzelnen Motiven/Bildbereichen zugeordneten Stichwörter automatisch auf das ganze Bild übertragen.
+--> AnalogeÜbertragung ist auch für Exponate und ihre Ressourcen denkbar aber wenige zwingend.
+--> Redundanz?!
+
+
+
+
+Ausblick: Graphdatenbank Neo4j
+==============================
+Eine zweite Beispielanwendung wird mit der Graphdatenbank Neo4j experimentieren. 
+Graphdatenbanken sind vor allem in Zusammenhang mit der Semantik (Beschlagwortung, Themenhierarchie, Ontologie) interessant.
+Neo4j arbeitet mit global identifizierbaren Entitäten (nodes = Knoten eines Graphen) variabler Struktur.
+Über der Knotenmenge werden entsprechend der grammatikalischen Struktur 'Subjekt-Prädikat-Objekt' einfacher Sätze gerichtete Verknüpfungen (Triplets) definiert.
+Subjekt und Prädikat entstammen der Knotenmenge, das Prädikat erlaubt eine Färbung des gerichteten Graphen. Die Verknüfungen werden als name/Value-Paare realisiert.
+In einer Graphdatenbank sind demnach die oben genannten überlagerten Hierarchien ohne Zusatzaufwand umsetzbar.
+'cypher' ist eine zu SQL analoge Abfrage- und Datenbankmanipulationssprache. 
+Die Einbettbarkeit, der graphischen Abfrageergebnisse in eine Webanwendung ist zu klären.
+
+Die Navigation in neo4j ist effizienter als in relationalen Datenbanken.
+Hingegen ist die heterogene und veränderbare Struktur der Knoten ein Vor- und Nachteil zugleich.
+Es existiert ein sql import.
+Allenfalls werden in der finalen Version des virtuellen Museums beide Datenbanktypen simultan eingesetzt. Der Austausch von Abfrageergebnissen via php müsste möglich sein.
+
+
+Ausblick: Sound-Color-Space Labor (RaV)
+=================================
+Im Rahmen der Evaluation der einzusetzenden Webtechnologien hat sich bei RaV die Idee eine Labors zu den Schlüsselbegriffen des Projekts Sound, Color, Space entwickelt.
+Auf der von RaV programmierten internen Website soll das Experimentieren mit den evaluierten Technolgien/Programmen via Web-Editor ermöglicht werden.
+In der endgültigen Fassung der Sound-Colour-Space Website soll das Labor registrierten Benützern zugänglich werden.
+Im Labor entwickelte interaktive Animationen könnten dem Museum in Form von MuseumsObjRessourcen zur Verfügung gestellt werden.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,228 @@
+DMu
+
+Kontakte/Zusammenarbeit
+=======================
+
+Sybille Krämer -> Diagrammatologie, Descartes 
+Benjamin Wardhaugh -> circular pitch diagrams, Descartes, history of mathematics
+Christoph Reuter -> Datenmodell, Vortrag timbre spaces
+Rainer Schmusch -> Klangfarbenmelodie, Herder
+Lesley Paganetti -> Lektorat gofml
+Dieter Binkert -> Graph DB
+Manuel Schürch -> Informatikstudent Absage
+Urs Müller -> Anfrage Progr. ?
+Marcel Bongni -> Bilder einer Ausstellung
+Stefan Graber -> Musik und Roboter, E.T.A Hoffmann
+
+Lucas Bennett -> Lektorat/Redaktion
+Jan Schacher -> Lektorat, immersive lab
+Stefano Papetti -> multimodal perception, haptic control (Descartes)
+Hanna Jarveläinen -> timbre
+
+Heiligensetzer BS UB -> Publikationsrechte / scans
+
+RaV:	Simon Pfaff -> Oculus Rift, Information Graphics, Interaction Design
+RaV:	Fabian Troxler -> Oculus Rift, Interaction Design
+
+Federico Celestini -> Acta Musicologica
+Alberto Pinto -> Mathematik und Musik
+Eike -> Schönberg Centre
+Lukas Nef -> 
+Matthias -> tischmusi/Mayer: Atalanta fugiens
+
+RaV:	Bojan Milosevic -> immersive lab
+
+Max Haas -> Continuum
+Martin Kirnberger -> smg Basel, Musikinstrumentenmuseum
+Christoph Balmer -> Musikabteilung BS UB
+Ramona Ruckli -> Mareshal 
+
+Tagungen/Vorträge/Vernissagen
+=============================
+
+Stille in der Musik 				13./14.12.05
+Buchvernissage Cab.Voltaire mit DMe		21.03.15
+Buchvernissage Fs. Lichtenhahn			30.03.15
+RV:	Frühjahrstagung INMM Darmstadt			08.04.15 - 11.04.15
+RV:	„Überblendungen - Neue Musik mit Film“
+		
+Vortrag: Alban Berg Kanon			28.04.15
+3d-Audio-Konferenz				09./10.05.15
+smg-100 Jahrfeier (MWI Uni Basel)		08.06.15
+
+RaV und JeV:
+Projekt-Paper „Local streamed Audio Performance“ ist für AM (Audiomostly - Conference on interaction with sound) 
+(7. bis 9. Oktober 2015 in Thessaloniki, Griechenland) eingereicht worden.
+	
+
+Datenbanken / Prototypen
+========================
+Ein erstes relationales Datenmodell wurde im Februar in Zusammenarbeit mit ChR erstellt und von DMu als leere Access-Datenbank eingegeben
+Das Modell wurde später leicht modifiziert als leere MySQl-Datenbank auf unserem Server mit phpMyadmin eingegeben.
+XAMPP wurde von DMu als lokaler Webserver mit php, mySql unter Windows 7 eingerichtet.
+Der Export der Datenbank in die lokale DB funktionierte nur unvollständig: nur ein Teil der Verknüpfungen wurde kopiert. Die Tabellen und ihre Attribute hingegen wurden korrekt übertragen.
+
+Beispielanwendung: Diagrammausstellung
+--------------------------------------
+DMu programmiert zum Erproben der Kombination php, mySql, html, jQuery, ajax eine kleine Beispielanwendung (3.7-8.7.15).
+Dazu wurde eine Sammlung von etwa 150 Kreisdiagrammen (jpg-Dateien mit sprechenden Namen) unter 'museumsObjRessource' in der Datenbank erfasst.
+Die Datenbanktabelle 'museumsObjRessource' speichert die Dateinamen und nicht etwa die Dateien selbst. 
+Das Programm "Directory List" kann die Filenamen aus Windows-Verzeichnissen auslesen.
+Bei vorsichtiger Handhabung sind also keine Inkonsistenzen zwischen der Datenbank und den zugeordneten Dateien zu befürchten.
+Auf Basis der Liste aus "Directory List" können txt-Tabellen oder excel-Tabellen erstellt, deren Inhalte in die MySql Datenbanktabelle importiert werden. 
+Kommaseparierte Listen, deren Elemente mit Anführungszeichen (" ") geklammert sind, gewähren einen problemlosen Import aus einer txt-Datei (utf-8).
+Die zugehörigen Texte sollten keine Sonderzeichen enthalten (oder nur in Form von html escape-Sequenzen).
+Das Erfassen der Datenbankinhalte in separaten Tabellen ist effizienter als die direkte Eingabe der Informationen in die Datenbank.
+Da phpMyadmin Export und Import auf den Tabelleninhalten unproblematisch ist, kann gestaffelt gearbeitet werden.
+Die Beispielanwendung kann dabei zur Überprüfung der Inhalte beigezogen werden.
+
+Die php/html-Beispielanwendung besteht aus zwei Webseiten zur Visualisierung von Museumsobjektressourcen und Museumsobjekten.
+
+Zu einem Museumsobjekt ('museumsObj') gehören mehrere Diagramme ('museumsObjRessource'). Die Tabelle 'assemblage' erfasst die zu Grunde liegende n:n-Beziehung.
+Eines der zu einem Museumsobjekt gehörenden Diagramme dient als dessen Repräsentant. 
+Das betreffende flag (is_repraesentant) in 'assemblage' kann später dazu verwendet werden verschiedene Dateitypen und Funktionalitäten zu definieren.
+Die Elemente von 'museumsObjRessource' haben ein Attribut 'dateiKennung' (mime-type), sodass die betreffenden Dateien in nach Dateitypen getrennten Verzeichnissen abgelegt werden können.
+In Zukunkft wird ein Museumsobjekt nicht nur Bilder, sondern auch interaktive Animationen und andere Inhalte wie zugehörige Zeitschriftenartikel, Bibliograpien etc. aufnehmen.
+
+Die Page 'vimu_diagArchive.php' listet alle Diagramme mit Miniaturansicht in einer scrollbaren Tabelle (rechts) auf. 
+Mouseover vergrössert das Diagramm, Mouseclick überträgt es zusammen mit seinen Metadaten in die "Diagrammzone" (links). 
+Die Diagrammzone kann beliebig viele Diagramme aufnehmen und ist ebenfalls scrollbar.
+Klick auf das Diagramm in der Diagrammzone öffnet das Diagramm in einem separaten tab/window in Originalgrösse. Klick auf die ID der Liste öffnet ebenfalls das Diagramm in einem separaten tab/window.
+Die Diagrammzone kann als Ganzes gelöscht werden. [Später werden individuelles Löschen, Umordnen und Verlinkungen eingebaut.]
+Die Diagrammzone wird mit jQuery/ajax angesprochen und verwaltet, sodass nicht die ganze Seite neu geladen werden muss, wenn weitere Diagramme in die Diagrammzone übertragen werden.
+
+Die Page 'vimu_museums_obj.php' ist ähnlich aufgebaut wie 'vimu_diagArchive.php'
+Wenn der User in der Liste der Museumsobjekte auf das zugehörige repräsentative Diagramm klickt, wird ein request mit der 'id' des Museumsobjekts an 'vimu_assemble_museObj.php' geschickt.
+Die php-Datei 'vimu_assemble_museObj.php' holt die Information zum betreffenden Museumsobjekt und seinen Diagrammen aus den Tabellen 'museumsObj', 'museumsObjRessource', 'assemblage'.
+Aus dem Ergebnis der Datenbankabfrage wird der html-Code für das betreffende Musuemsobjekt und seine Bestandteile erzeugt. 
+Dieser html-Code wird in der Diagrammzone ausgeführt. 
+In der Diagrammzone werden die Metadaten des ausgewählten Museumsobjekts über einer scrollbaren Liste mit den zugehörigen Diagrammen und ihren Metadaten dargestellt.
+Auch hier öffnet der Mausklick auf das Diagramm das zugehörige Bild in Originalgrösse in einem separaten Tab.
+Die Diagrammzone enthält die nach Jahreszahl geordneten Diagramme zu einem einzigen Museumsobjekt. Weitere Anordnungen sind geplant.
+In der Diagrammzone wird jeweils nur ein Museumsobjekt dargestellt.
+Bei Klick auf ein anderes Element der Museumsobjektliste wird der Inhalt der Diagrammzone ersetzt. 
+
+
+Fazit
+-----
+Die in relativ kurzer Zeit erstellte Beispielanwendung zeigt, dass die Kenntnisse zur Implementation des Museums im Team grundsätzlich vorhanden sind.
+Die verbleibenden Prozente aus Christine Kaufmanns Erbe könnten also auf musikwissenschaftliche, redaktionelle und gestalterische Arbeiten verteilt werden.
+
+
+Ausblick: Beschlagwortung, Themenhierarchien
+--------------------------------------------
+Alle Tabellen haben ein Attribut 'id', das als Primärschlüssel pro Tabelle eindeutig ist.
+Mehrere Tabellen verfügen auch über die Attribute 'Bezeichnung' und 'Beschreibung'.
+Es ist geplant, die Beschlagwortung über mehreren Tabellen 'museumsObj', 'museumsObjRessource', 'Ausstellung', 'Buchquellen', etc. zu implementieren
+Dazu wird in jeder der betroffenen Tabelle ein zusätzliches Argument 'global_id' eingefügt. 
+Dieses wird aus einer eindeutigen Tabellennummer und der tabellenbezogenen 'id' errechnet: 
+Beispielsweise ist die global_id des Datensatzes mit id 135 in der Tabelle 7 als '7_135' definiert.
+Damit ist global_id ein über die Datenbank eindeutiger Schlüssel. 
+Die Beschlagwortung wird über diese globale Identifikation vorgenommen.
+Eine Tabelle mit Paaren von global_id regelt die Beschlagwortung über den zugehörigen heterogenen Objekten (Datensätze aus verschiedenen Tabellen).
+
+Typischerweise gibt dann eine Schlagwortabfrage, die von einem Museumsobjekt und seinen zugeordneten Schlagwörtern ausgeht, 
+Links auf andere Museumsobjekte, Museumsobjektressourcen, Ausstellungen, übergeordnete Themen, Laboranwendungen etc. zurück.
+Die Präsentation der gegliederten Suchergebnisse wird aus mehreren sql-Abfragen ermittelt.
+
+Das Vorgehen ist ein relationaler Ersatz für eine primitive Vererbung mit einem generischen Objekttyp (id, Bezeichnung, Beschreibung) von dem verschiedene Tabellen erben.
+[Vorsicht: Löschen von Datensätzen aus den Basistabellen, gelöschte id nie neu vergeben!; eventuell view mit Konsistenzprüfung]
+
+Die Implementierung der überlagerten Themenhierarchien wird vor allem bezüglich zugehörigen Navigationsgraphen und Navigationsexplorern anspruchsvoll.
+
+
+Ausblick: Graphdatenbank Neo4j
+------------------------------
+Eine zweite Beispielanwendung wird mit der Graphdatenbank Neo4j experimentieren. 
+Graphdatenbanken sind vor allem in Zusammenhang mit der Semantik (Beschlagwortung, Themenhierarchie, Ontologie) interessant.
+Neo4j arbeitet mit global identifizierbaren Entitäten (nodes = Knoten eines Graphen) variabler Struktur.
+über der Knotenmenge werden entsprechend der grammatikalischen Struktur 'Subjekt-Prädikat-Objekt' einfacher Sätze gerichtete Verknüpfungen (Triplets) definiert.
+Subjekt und Prädikat entstammen der Knotenmenge, das Prädikat erlaubt eine Färbung des gerichteten Graphen. Die Verknüpfungen werden als name/Value-Paare realisiert.
+In einer Graphdatenbank sind demnach die oben genannten überlagerten Hierarchien ohne Zusatzaufwand umsetzbar.
+'cypher' ist eine zu SQL analoge Abfrage- und Datenbankmanipulationssprache. 
+Die Einbettbarkeit, der graphischen Abfrageergebnisse in eine Webanwendung ist zu klären.
+
+Die Navigation in neo4j ist effizienter als in relationalen Datenbanken.
+Hingegen ist die heterogene und veränderbare Struktur der Knoten ein Vor- und Nachteil zugleich.
+Es existiert ein sql import.
+Allenfalls werden in der finalen Version des virtuellen Museums beide Datenbanktypen simultan eingesetzt. Der Austausch von Abfrageergebnissen via php müsste möglich sein.
+
+Ausblick: Sound-Color-Space Labor (RaV)
+---------------------------------------
+Im Rahmen der Evaluation der einzusetzenden Webtechnologien hat sich bei RaV die Idee eine Labors zu den Schlüsselbegriffen des Projekts Sound, Color, Space entwickelt. Auf der von RaV programmierten internen Website soll das Experimentieren mit den evaluierten Technologien/Programmen via Web-Editor ermöglicht werden. In der endgültigen Fassung der Sound-Colour-Space Website soll das Labor registrierten Benützern zugänglich werden.
+Die Möglichkeiten der verschiedenen Javascript-Bibliotheken zur Erstellung interaktiver Inhalte sind umfangreich. Die Beteiligten Personen haben zumeist das Fachwissen zur Erstellung der Inhalte, jedoch nicht das Wissen um die jeweiligen Webtechnologien, die sich in diesem Bereich rasant entwickeln. Das Labor soll mit Hilfe eines Web-Editor das Erstellen von interaktiven Inhalten zugänglich machen und wesentlich erleichtern. 
+
+Das Labor soll sowohl zum Austesten verschieden Webtechnologien dienen als auch als Resource für Tutorials und Wissen zur Verfügung stehen. Im Labor entwickelte interaktive Animationen könnten dem Museum in Form von MuseumsObjRessourcen zur Verfügung gestellt werden und in die Datenbank aufgenommen werden.
+Im Zuge der inhaltlichen Themenstellung wurde auch die Frage erörtert, wie sich das Projekt gegenwärtigen künstlerischen Themen nähern kann. Verschiedene künstlerische Projekte können auch in das Museum aufgenommen werden, bzw. kann das Labor auch als Basis für künstlerische Projekte konzipiert werden. Das geplante Labor soll eine Brücke zwischen virtuellen Anwendungen und praktisch, künstlerischen Projekten schlagen. 
+
+
+RaV:
+Konzeption der Anwendung:
+=========================
+
+In den Besprechungen und in Zusammenarbeit von RaV und DMu wurde der Funktionsumfang erarbeitet und bestimmt. Wichtige Rolle spielten dabei die Umschreibung und Eingrenzung der inhaltlichen Erfordernisse sowie die Möglichkeiten der technischen und gestalterischen Umsetzung. Die erarbeiteten Kriterien wurden in Diagrammen festgehalten und in erste gestalterische Ideen umgesetzt. Die umfangreiche Recherche zu wissenschaftlichen und technischen Themen führten zur Entwicklung einer eigenen internen Homepage, die das recherchierte Material zusammenfasst und den beteiligten Personen zur Verfügung stellt. Die einzelnen Rubriken werden von RaV laufend erweitert und aktualisiert. Neben den sonstigen genutzten Sharing-Programmen kann die Arbeit des Projektes damit übersichtlich dargestellt werden und hilft den sporadisch beteiligten Personen sich schnell über den aktuellen Stand des Projektes zu informieren.
+
+
+Software Recherche:
+-------------------
+
+RaV und DaM recherchierten über die Möglichkeiten interaktiver und multimedialer Gestaltung. Es wurden verschiedene Software Optionen ausprobiert und getestet (Javascript-Bibliotheken, Hyperimage, html Anwendungen, Java etc.). 
+Viele interaktiven Anwendungen werden noch immer mit Flash programmiert, aber es wurde schnell klar, dass html5 mit Javascript die zukunftsträchtigere Option ist. Flash-Anwendungen funktionieren zumeist nicht auf mobilen Plattformen, es gibt zudem auch häufig Sicherheitsprobleme und damit die Notwendigkeit von Usern, das Flash-Plugin, welches zur Darstellung im Browser benötigt wird, häufig erneuern zu müssen. Zudem sind die interaktiven Möglichkeiten von html5+javascript schon brauchbar und werden sich vermutlich noch weiter entwickeln. Es wird von einigen Experten aufgrund der Sicherheitsbedenken gefordert, auf Flash in Zukunft generell zu verzichten. 
+Auch bei Java Anwendungen gibt es Sicherheitsbedenken, sodass sich eine Kombination von html5 und weiteren Javascript für das Frontend anbietet. Für die Programmierung des Servers wurde PHP (in Verbindung mit NodeJS und anderen eventuell benötigten Diensten) favorisiert, das es für die beteiligten Personen die zugänglichste Möglichkeit ist.
+
+Für die interaktive Gestaltung über die Klangsynthese und Bildbearbeitung gibt es (im nativen html5-Code wie html5 Audio und auch mit verschiedensten Javascript-Bibliotheken) eine Vielzahl von Möglichkeiten, welches auch zu der Überlegung geführt hat, einerseits einen Server an der ZHdK einzurichtenden, der den vollen Zugriff auf alle Optionen erlaubt, anderseits auch die Entwicklung eines virtuellen „Labors“ einzurichten, um derzeitigen und zukünftig beteiligten Personen die Möglichkeit zu bieten, Software und interaktive Möglichkeiten zu erkunden und sich aneignen zu können. 
+
+
+
+Inhaltliche Beiträge und Diskussionen:
+===========================================
+
+Grundsätzlich orientiert sich das Projekt an den Forschungen von Daniel Muzzulini und angrenzenden Bereichen (Christoph Reuter, Benjamin Wardhaugh, Sybille Krämer etc.). Die Planung einer abschliessenden Konferenz wurde organisatorisch und inhaltlich vorangetrieben, eine Liste von relevanten Personen wurde erstellt und Termine vereinbart. Die umfangreichen Recherchen zu relevanten Themen des Projektes wurden in der internen Homepage gesammelt und den beteiligten Personen zur Verfügung gestellt.
+
+Künstlerische Projekte (RaV)
+-------------------------------
+Es wurde diskutiert in welchen Bereichen sich das Projekt in Richtung einer gegenwärtig künstlerischen Praxis oder künstlerischen Forschung erweitert werden kann. Ergänzend zu wissenschaftlichen Forschungen werden auch künstlerische Projekte von RaV und JeV zu den relevanten Themen entwickelt und inhaltlich in den Diskurs eingebracht. 
+Das Projekt „Local streamed Audio Performance“ ist für AM (Audiomostly - Conference on interaction with sound) eingereicht worden und wird im Zuge des Projektes weiterentwickelt.
+Das Projektteam evaluierte auch verschiedene Möglichkeiten, die im ICST bereits vorhandene Infrastruktur für Projekte zu nutzen. Dabei herrscht Übereinkunft, dass sich das „Immersiv Lab“ für die Erweiterung des virtuellen Raumes und der Darstellung der Inhalte in einen realen Raum gut eignen könnte. Zusammen mit relevanten künstlerischen Projekten wird dies auch als Teil der Abschlusskonferenz geplant. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
